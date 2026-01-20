@@ -1,75 +1,34 @@
-# React + TypeScript + Vite
+La narrativa debe apoyarse en la ironía: los pollos no están "recolectando" comida por hambre, están **saboteando la receta** para que Castón Augurio no pueda cocinarlos. Si no hay papas, ni ají, ni beterraga, no hay pollada.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 1. El Antagonista: Castón Augurio
 
-Currently, two official plugins are available:
+Castón no es solo un chef; es un "artista del sabor" implacable. Su objetivo es mantener su estrella Michelin a toda costa.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Motivación:** Se le han escapado los ingredientes principales (los pollos) y ahora lo están dejando sin suministros frente a sus comensales VIP.
+* **Comportamiento:** Su obsesión con el orden hace que persiga al "eslabón más débil" (el de menor puntaje), ya que lo considera el ingrediente más fácil de atrapar para salvar el plato del día.
 
-## React Compiler
+### 2. Los Protagonistas (Los Pollos)
+* **Pollo a la Brasa:** El "clásico" que escapó del horno justo antes de que cerraran la puerta.
+* **Pollo al Ceviche (Cevipollo):** Una aberración culinaria que busca venganza por su extraña existencia.
+* **Pollo Estofado:** Bañado en zanahoria y arvejas, escurridizo pero pesado.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## Estructura de la Partida
 
-## Expanding the ESLint configuration
+### El Inicio (La Despensa)
+El juego comienza con una frase de Castón en un globo de texto: *"¡Un chef no es nada sin su mise en place!"* (Un chef no es nada sin su preparación).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### El Conflicto: Mecánica de Sabotaje
+1. **Ingredientes:** La barra de ingredientes no es solo una lista de compras; es la **Receta del Día**. Al comer los ingredientes, los pollos están robando la base del plato.
+2. **El Peso de la Culpa (y la Grasa):** Al comer más, los pollos se vuelven lentos. Narrativamente, esto es el "Empacho". Estás más cerca de ganar (por puntaje), pero físicamente más cerca de la muerte porque no puedes correr. Esto crea una **tensión táctica**.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### El Clímax: El aumento de velocidad
+A medida que pasan las rondas, la cocina se vuelve un caos. Castón entra en "Kitchen Nightmare" (Pesadilla en la cocina). Su velocidad aumenta porque el restaurante está por abrir y no tiene qué servir.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## El Final: "Pollada Pe!" o "Somos libres, seamolo siempre"
+* **Victory Screen (Pantalla de Victoria):** Se muestra a los pollos sobrevivientes cruzando la puerta trasera hacia la calle, con un fondo de libertad, mientras de fondo se escucha a Castón gritando.
+* **Game Over / Loss (El Menú):** Aquí aplicamos tu idea. No solo se muestra al perdedor convertido en comida, sino que aparece la carta del restaurante con el nombre del jugador:
+* *"Sugerencia del Chef: [Nombre del Jugador] a la leña con papas fritas"*.
