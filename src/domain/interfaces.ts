@@ -2,33 +2,6 @@ import type { TDirection, TPlayerId } from "./types";
 
 //#region
 
-// una coordenada
-export interface ICoordinate {
-  x: number; // eje x
-  y: number; // eje y
-}
-
-// sprite/imagen
-export interface ISprite {
-  path: string; // ruta del archivo
-  width: string; // ancho
-  height: string; // alto
-}
-
-// una fila del sprite
-type TRow = [ICoordinate, ICoordinate, ICoordinate, ICoordinate];
-
-// personaje (pollo, chef, etc)
-export interface ICharacter {
-  name: string; // nombre
-  sprite: ISprite; // sprite
-  // frames del sprite que apuntan:
-  front: TRow; // al frente
-  left: TRow; // la izquierda
-  right: TRow; // la derecha
-  back: TRow; // hacia atras
-}
-
 // teclas para moverse
 export interface IKeys {
   up: string; // tecla arriba
@@ -37,21 +10,41 @@ export interface IKeys {
   right: string; // tecla derecha
 }
 
+// una coordenada/frame
+export interface ICoordinate {
+  x: number; // eje x
+  y: number; // eje y
+}
+
+// sprite/imagen
+export interface ISprite {
+  name: string; // nombre del sprite
+  path: string; // ruta del archivo
+  widthFrame: number; // ancho del frame
+  heightFrame: number; // alto del frame
+  // frames del sprite que apunta
+  frontFrames: ICoordinate[]; // al frente
+  leftFrames: ICoordinate[]; // a la izquierda
+  rightFrames: ICoordinate[]; // a la derecha
+  backFrames: ICoordinate[]; // hacia atras
+}
+
 //#endregion
 
 export interface IPlayer {
   id: TPlayerId; // identificador
-  name: string; // nombre
-  chicken: ICharacter; // pollo
+  name: string; // nombre del jugador
+  sprite: ISprite; // pollo elegido
   keys: IKeys; // teclas del jugador
   isMoving: boolean; // si se esta moviendo
   location: ICoordinate; // ubicacion en el mapa
   direction: TDirection; // direccion en la que apunta
-  score: number; // puntaje
   speed: number; // velocidad
+  score: number; // puntaje
 }
 
-export interface IEnemy extends ICharacter {
+export interface IEnemy {
+  sprite: ISprite;
   isMoving: boolean; // si se esta moviendo
   location: ICoordinate; // ubicacion en el mapa
   direction: TDirection; // direccion en la que apunta
@@ -59,8 +52,7 @@ export interface IEnemy extends ICharacter {
 }
 
 export interface IIngredient {
-  name: string; // nombre
-  sprite: ISprite; // sprite
-  frames: TRow[]; // array de frames
+  sprite: ISprite;
   location: ICoordinate; // ubicacion en el mapa
+  points: number; // puntos
 }
