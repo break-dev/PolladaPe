@@ -91,8 +91,9 @@ export const chickens = [
 // todos los ingredientes unicos que el jugador
 // podra recolectar. Ya en el juego cada ingrediente
 // tendra su propia ubicacion a recolectar y puntos
-export const ingredients = [
+const _ingredients = [
   {
+    id: "",
     sprite: {
       name: "Zanahoria",
       path: zanahoria_sprite_path,
@@ -105,6 +106,7 @@ export const ingredients = [
     points: 1,
   },
   {
+    id: "",
     sprite: {
       name: "Cebolla",
       path: cebolla_sprite_path,
@@ -117,6 +119,7 @@ export const ingredients = [
     points: 1,
   },
   {
+    id: "",
     sprite: {
       name: "Papa",
       path: papa_sprite_path,
@@ -129,6 +132,7 @@ export const ingredients = [
     points: 1,
   },
   {
+    id: "",
     sprite: {
       name: "Beterraga",
       path: beterraga_sprite_path,
@@ -141,3 +145,8 @@ export const ingredients = [
     points: 1,
   },
 ] as IIngredient[];
+
+export const ingredients = _ingredients.reduce(
+  (acc, item) => ({ ...acc, [item.id]: item }),
+  {},
+);

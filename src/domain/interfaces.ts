@@ -52,6 +52,7 @@ export interface IEnemy {
 }
 
 export interface IIngredient {
+  id: string; // identificador - evita colisiones con otros ingredientes
   sprite: ISprite;
   location: ICoordinate; // ubicacion en el mapa
   points: number; // puntos

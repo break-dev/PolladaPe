@@ -12,26 +12,42 @@ import {
   player1,
   player2,
 } from "./utils/initialState";
+import type { TPlayerId } from "../domain/types";
 
 export interface IGameStore {
-  // Estado inicial
-  quantityPlayers: number; // cantidad de jugadores
-  chickens: ISprite[]; // pollos
-  player1: IPlayer; // jugador 1
-  player2: IPlayer; // jugador 2
-  enemy: IEnemy; // enemigo
-  ingredients: IIngredient[]; // ingredientes
+  // Estado inicial del juego
+  quantityPlayers: number;
+  chickens: ISprite[];
+  player1: IPlayer;
+  player2: IPlayer;
+  enemy: IEnemy;
+  ingredients: Record<string, IIngredient>;
 
-  // Setters
-  setQuantityPlayers: (quantityPlayers: number) => void;
-  setPlayer1: (data: Partial<IPlayer>) => void;
-  setPlayer2: (data: Partial<IPlayer>) => void;
-  setEnemy: (data: Partial<IEnemy>) => void;
+  // UPDATES
 
-  // Gestión de ingredientes
-  setIngredients: (ingredients: IIngredient[]) => void;
+  // General
+  setQuantityPlayers: (quantity: number) => void;
+
+  // Jugadores
+  // id precisa si es el primer o segundo jugador
+  // key indica que propiedad del jugador se actualizara
+  // value es el valor que se le asignara a la propiedad
+  updatePlayer: <K extends keyof IPlayer>(
+    id: TPlayerId,
+    key: K,
+    value: IPlayer[K],
+  ) => void;
+
+  // Enemigo
+  updateEnemy: <K extends keyof IEnemy>(key: K, value: IEnemy[K]) => void;
+
+  // Ingredientes
   addIngredient: (ingredient: IIngredient) => void;
-  removeIngredient: (index: number) => void;
+  removeIngredient: (id: string) => void;
+  setIngredients: (ingredients: Record<string, IIngredient>) => void;
+
+  // Reset del juego
+  resetGame: () => void;
 }
 
 export const useGameStore = create<IGameStore>((set) => ({
@@ -43,32 +59,56 @@ export const useGameStore = create<IGameStore>((set) => ({
   enemy: enemy,
   ingredients: ingredients,
 
+  // Actualizaciones para una propiedad específica
+  // del juegador o enemigo
+
+  // General
   setQuantityPlayers: (quantityPlayers) => set({ quantityPlayers }),
 
-  setPlayer1: (data) =>
+  // Jugadores
+  updatePlayer: (id, key, value) =>
     set((state) => ({
-      player1: { ...state.player1, ...data },
+      [id]: {
+        ...state[id],
+        [key]: value,
+      },
     })),
 
-  setPlayer2: (data) =>
+  // Enemigo
+  updateEnemy: (key, value) =>
     set((state) => ({
-      player2: { ...state.player2, ...data },
+      enemy: {
+        ...state.enemy,
+        [key]: value,
+      },
     })),
 
-  setEnemy: (data) =>
-    set((state) => ({
-      enemy: { ...state.enemy, ...data },
-    })),
-    
+  // Ingredientes
   setIngredients: (ingredients) => set({ ingredients }),
 
   addIngredient: (ingredient) =>
     set((state) => ({
-      ingredients: [...state.ingredients, ingredient],
+      ingredients: {
+        ...state.ingredients,
+        [ingredient.id]: ingredient,
+      },
     })),
 
-  removeIngredient: (index) =>
-    set((state) => ({
-      ingredients: state.ingredients.filter((_, i) => i !== index),
-    })),
+  removeIngredient: (id) =>
+    set((state) => {
+      // Desestructuración para eliminar una propiedad sin mutar el original
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [id]: _, ...remainingIngredients } = state.ingredients;
+      return { ingredients: remainingIngredients };
+    }),
+
+  // Restablece el estado del juego al estado inicial
+  resetGame: () =>
+    set({
+      player1,
+      player2,
+      enemy,
+      ingredients: ingredients,
+      quantityPlayers: 1,
+    }),
 }));
